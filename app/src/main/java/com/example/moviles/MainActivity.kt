@@ -14,6 +14,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.moviles.core.navigation.NavigationWrapper
 import com.example.moviles.view.Products.view.EditSingleProductScreen
 
 
@@ -30,31 +31,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    val navController = rememberNavController()
-                    NavHost(navController = navController, startDestination = "login_screen") {
-                        composable("login_screen") {
-                            LoginScreen(navController = navController)
-                        }
-                        composable("home_screen") {
-                            HomeScreen(navController)
-                        }
-                        composable("add_product_screen") {
-                            AddProductScreen(navController = navController)
-                        }
-                        composable("list_products_screen") {
-                            ListProductsScreen(navController)
-                        }
-                        composable("edit_delete_product_screen") {
-                            EditDeleteProductScreen(navController)
-                        }
-                        composable(
-                            route = "edit_single_product_screen/{productId}",
-                            arguments = listOf(navArgument("productId") { type = NavType.StringType })
-                        ) { backStackEntry ->
-                            EditSingleProductScreen(navController, backStackEntry.arguments?.getString("productId"))
-                        }
-
-                    }
+                NavigationWrapper()
                 }
             }
         }
